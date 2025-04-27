@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <meta name="description" content="Servicios profesionales de ingeniería y construcción en Honduras. Expertos en construcción civil, diseño arquitectónico y obras públicas.">
+    <meta name="keywords" content="construcción, ingeniería, Honduras, San Pedro Sula, obras públicas, diseño arquitectónico">
+    <title>Servicios de Ingeniería y Construcción Galel Hernandez Romero S.de R.L.de C.V</title>
+    <style>
+        .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-logo {
+    height: 75px;
+    vertical-align: middle;
+    transition: 0.3s;
+    filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.5));
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-text h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.brand-text span {
+    color: #D4AF37;
+}
+
+.brand-text p {
+    font-size: 0.8rem;
+    color: #D4AF37;
+    margin: 0;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .header-brand {
+        gap: 10px;
+    }
+    
+    .main-logo {
+        height: 55px;
+    }
+    
+    .brand-text h1 {
+        font-size: 1.2rem;
+    }
+    
+    .brand-text p {
+        font-size: 0.7rem;
+    }
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #121212;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            transition: 0.5s;
+            border-bottom: 2px solid #D4AF37;
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2);
+        }
+        
+        .header-scrolled {
+            background-color: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+        
+        .logo span {
+            color: #D4AF37;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: #D4AF37;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #D4AF37;
+            transition: 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #D4AF37;
+            color: #000000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.3s;
+            margin: 0 auto;
+        }
+        
+        .hero .btn-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #BF9B30;
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #D4AF37;
+        }
+        
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 30px;
+        }
+        
+        .vision-mission {
+            background-color: #0F0F0F;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .vm-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .vm-box {
+            background-color: #000000;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+        
+        .vm-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid #D4AF37;
+        }
+        
+        .vm-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #D4AF37;
+        }
+        
+        .services {
+            background-color: #000000;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: #0F0F0F;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #D4AF37;
+        }
+        
+        .service-icon {
+            background-color: #D4AF37;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: #000000;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .projects {
+            background-color: #0F0F0F;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            border: 1px solid #333;
+            background-color: #0A0A0A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #D4AF37;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            color: #D4AF37;
+            text-align: center;
+        }
+        
+        .project-info {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: 0.5s;
+            border-top: 1px solid #D4AF37;
+            text-align: center;
+        }
+        
+        .project-card:hover .project-info {
+            bottom: 0;
+        }
+        
+        .contact {
+            background-color: #000000;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #0F0F0F;
+            color: #ffffff;
+            transition: 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #D4AF37;
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            position: absolute;
+            bottom: -18px;
+            left: 0;
+        }
+        
+        footer {
+            background-color: #0F0F0F;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #000000;
+            border-radius: 50%;
+            margin: 0 10px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid #333;
+        }
+        
+        .social-links a:hover {
+            background-color: #D4AF37;
+            color: #000000;
+            transform: translateY(-5px);
+        }
+        
+        .footer-nav {
+            margin-bottom: 20px;
+        }
+        
+        .footer-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        
+        .footer-nav a:hover {
+            color: #D4AF37;
+        }
+        
+        .copyright {
+            color: #777;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #D4AF37;
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 99;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #BF9B30;
+        }
+        
+        /* Responsive */
+        .location {
+    background-color: #0F0F0F;
+}
+
+.location-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.location-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.location-info-item {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 300px;
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+    border: 1px solid #333;
+}
+
+.location-info-item:hover {
+    transform: translateY(-5px);
+    border-color: #D4AF37;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .location-info {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-container iframe {
+        height: 300px;
+    }
+}
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .vm-box {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Mobile menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                background-color: #121212;
+                width: 100%;
+                padding: 20px 0;
+                transition: 0.4s;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .header-content {
+                flex-direction: row;
+            }
+        }
+        .clients {
+    background-color: #000000;
+    padding: 50px 0; /* Sección más compacta */
+}
+
+.clients-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.client-logo {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-container {
+    width: 100%;
+    height: 120px;
+    background-color: #0F0F0F;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+.logo-container:hover {
+    transform: translateY(-5px);
+    border-color: #D4AF37;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+.logo-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    color: #D4AF37;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .clients-grid {
+        gap: 20px;
+    }
+    
+    .client-logo {
+        min-width: 140px;
+    }
+    
+    .logo-container {
+        height: 100px;
+    }
+    
+    .logo-placeholder {
+        font-size: 0.8rem;
+    }
+}
+.logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+
+    </style>
+</head>
+<body>
+    
+   <!-- Header -->
+<header id="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="header-brand">
+                <img src="file:///home/chelson/Downloads/Project/images/ChatGPT%20Image%20Apr%2017,%202025,%2012%2010%2059%20PM.png" alt="Logo Galel Hernandez" class="main-logo">
+                <div class="brand-text">
+                    <h1>GALEL <span>HERNANDEZ</span></h1>
+                    <p>Ingeniería y Construcción</p>
+                </div>
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+                ≡
+            </button>
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#vision-mission">Visión y Misión</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#clients">Clientes</a></li>
+                    <li><a href="#location">Ubicación</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <style>
+        /* Animaciones para elementos al hacer scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mejoras en hover para cards */
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Fondos con patrones sutiles */
+        .about {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23333333' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-color: #0A0A0A;
+        }
+        
+        .services {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='18' viewBox='0 0 100 18'%3E%3Cpath fill='%23333333' fill-opacity='0.1' d='M61.82 18c3.47-1.45 6.86-3.78 11.3-7.34C78 6.76 80.34 5.1 83.87 3.42 88.56 1.16 93.75 0 100 0v6.16C98.76 6.05 97.43 6 96 6c-9.59 0-14.23 2.23-23.13 9.34-1.28 1.03-2.39 1.9-3.4 2.66h-7.65zm-23.64 0H22.52c-1-.76-2.1-1.63-3.4-2.66C11.57 9.3 7.08 6.78 0 6.16V0c6.25 0 11.44 1.16 16.14 3.42 3.53 1.7 5.87 3.35 10.73 7.24 4.45 3.56 7.84 5.9 11.31 7.34zM61.82 0h7.66a39.57 39.57 0 0 1-7.34 4.58C57.44 6.84 52.25 8 46 8S34.56 6.84 29.86 4.58A39.57 39.57 0 0 1 22.52 0h15.66C41.65 1.44 45.21 2 50 2c4.8 0 8.35-.56 11.82-2z'%3E%3C/path%3E%3C/svg%3E");
+            background-color: #000000;
+        }
+        
+        .projects {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23333333' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            background-color: #0F0F0F;
+        }
+        
+        /* Botones mejorados */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover:before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 7px 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(212, 175, 55, 0.3);
+            border-top: 4px solid #D4AF37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #20ba5a;
+            transform: scale(1.1);
+        }
+        
+        /* Banner CTA flotante */
+        .cta-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 15px 0;
+            text-align: center;
+            z-index: 98;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
+            border-top: 1px solid #D4AF37;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .cta-banner.show {
+            transform: translateY(0);
+        }
+        
+        .cta-banner-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .cta-banner-text {
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+        
+        .cta-banner-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .cta-banner-close:hover {
+            color: #D4AF37;
+        }
+        
+        /* Testimonios carrusel */
+        .testimonials {
+            background-color: #0a0a0a;
+            padding: 80px 0;
+        }
+        
+        .testimonial-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-slide {
+            flex: 0 0 100%;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .testimonial-content {
+            background-color: #0F0F0F;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .testimonial-content:after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 20px 20px 0;
+            border-style: solid;
+            border-color: #0F0F0F transparent transparent;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .testimonial-quote:before,
+        .testimonial-quote:after {
+            content: '"';
+            color: #D4AF37;
+            font-size: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid #D4AF37;
+        }
+        
+        .testimonial-name {
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-company {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .testimonial-dot.active {
+            background-color: #D4AF37;
+        }
+        
+        .testimonial-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .testimonial-arrow:hover {
+            background-color: rgba(212, 175, 55, 0.7);
+        }
+        
+        .testimonial-prev {
+            left: 10px;
+        }
+        
+        .testimonial-next {
+            right: 10px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            background-color: #0A0A0A;
+            padding: 80px 0;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #333;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 20px 30px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 30px;
+            background-color: #0F0F0F;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: #D4AF37;
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+            top: 40px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+        
+        /* Stats counter */
+        .stats {
+            background-color: #000000;
+            padding: 60px 0;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 30px;
+            text-align: center;
+            background-color: #0F0F0F;
+            border-radius: 10px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: #D4AF37;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        
+        /* Mejoras para íconos sociales */
+        .social-links a {
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:nth-child(1)::before {
+            content: "\f39e";
+            font-family: "Font Awesome 5 Brands";
+        }
+        
+        .social-links a:nth-child(2)::before {
+            content: "\f099";
+            font-family: "Font Awesome 5 Brands";
+        }
+        
+        .social-links a:nth-child(3)::before {
+            content: "\f0e1";
+            font-family: "Font Awesome 5 Brands";
+        }
+        
+        .social-links a:nth-child(4)::before {
+            content: "\f16d";
+            font-family: "Font Awesome 5 Brands";
+        }
+        
+        /* Proyectos con filtro y lightbox */
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            background-color: #0A0A0A;
+            color: #ffffff;
+            border: 1px solid #333;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #D4AF37;
+            color: #000000;
+            border-color: #D4AF37;
+        }
+        
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10001;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background-color: #D4AF37;
+        }
+        
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10001;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-prev:hover, .lightbox-next:hover {
+            background-color: #D4AF37;
+        }
+        
+        .lightbox-prev {
+            left: 20px;
+        }
+        
+        .lightbox-next {
+            right: 20px;
+        }
+        
+        /* Mejoras para validación de formulario */
+        .form-control.valid {
+            border-color: #28a745;
+        }
+        
+        .form-control.invalid {
+            border-color: #dc3545;
+        }
+        
+        .form-submit-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .form-submit-success {
+            background-color: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+        
+        .form-submit-error {
+            background-color: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline-container::after {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 20px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 20px;
+            }
+            
+            .testimonial-arrow {
+                display: none;
+            }
+        }
+    </style>
+    
+</header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>SERVICIOS DE INGENIERÍA Y CONSTRUCCIÓN</h1>
+            <p>Soluciones innovadoras y de alta calidad para todos sus proyectos de ingeniería y construcción</p>
+            <div class="btn-container">
+                <a href="#contact" class="btn">Solicitar Presupuesto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nosotros</h2>
+                <p>Conoce más sobre nuestra empresa</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>¿Quiénes Somos?</h3>
+                    <p>Servicios de Ingeniería y Construcción Galel Hernandez Romero S.de R.L.de C.V es una empresa líder en el sector de la construcción e ingeniería, con amplia experiencia en el desarrollo de proyectos civiles, industriales y comerciales.</p>
+                    <p>Desde nuestra fundación, nos hemos destacado por ofrecer soluciones innovadoras, eficientes y sostenibles, cumpliendo con los más altos estándares de calidad y seguridad.</p>
+                    <p>Nuestro equipo está conformado por profesionales altamente calificados y comprometidos con la excelencia, lo que nos permite garantizar resultados excepcionales en cada uno de nuestros proyectos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Vision and Mission Section -->
+    <section class="vision-mission" id="vision-mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visión y Misión</h2>
+                <p>Los valores que nos guían</p>
+            </div>
+            <div class="vm-container">
+                <div class="vm-box">
+                    <h3>Nuestra Visión</h3>
+                    <p>Ser reconocidos como líderes en la industria de la construcción e ingeniería, destacándonos por nuestra excelencia, innovación y compromiso con el desarrollo sostenible.</p>
+                    <p>Aspiramos a expandir nuestra presencia a nivel nacional e internacional, manteniendo siempre los más altos estándares de calidad y satisfacción del cliente.</p>
+                </div>
+                <div class="vm-box">
+                    <h3>Nuestra Misión</h3>
+                    <p>Proporcionar soluciones integrales de ingeniería y construcción que superen las expectativas de nuestros clientes, a través de la implementación de tecnologías avanzadas y prácticas sostenibles.</p>
+                    <p>Nos comprometemos a trabajar con integridad, responsabilidad y pasión, creando valor para nuestros clientes y contribuyendo positivamente al desarrollo de las comunidades donde operamos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Soluciones integrales para sus necesidades</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Construcción Civil</h3>
+                    <p>Desarrollamos proyectos residenciales, comerciales e industriales con los más altos estándares de calidad y seguridad.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Diseño Arquitectónico</h3>
+                    <p>Creamos diseños innovadores y funcionales que se adaptan a las necesidades específicas de cada cliente.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Consultoría en Ingeniería</h3>
+                    <p>Ofrecemos asesoramiento especializado en todas las etapas de sus proyectos de construcción e ingeniería.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Mantenimiento de Infraestructuras</h3>
+                    <p>Proporcionamos servicios de mantenimiento preventivo y correctivo para garantizar la durabilidad de sus instalaciones.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">♻️</div>
+                    <h3>Construcción Sostenible</h3>
+                    <p>Implementamos prácticas y tecnologías sostenibles que minimizan el impacto ambiental de los proyectos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛣️</div>
+                    <h3>Obras Públicas</h3>
+                    <p>Ejecutamos proyectos de infraestructura pública como carreteras, puentes y sistemas de saneamiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proyectos Destacados</h2>
+                <p>Conoce algunos de nuestros trabajos</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="file:///home/chelson/Downloads/Project/images/357780743_10160980601784379_6562419864231971651_n.jpg" alt="Caja puente yarula" width="500" height="300">
+                    <div class="project-title"></div>
+                    <div class="project-info">
+                        <h3>Caja Puente Yarula, La Paz </h3>
+                        <p>Construcción de un puente vehicular de concreto armado para mejorar la conectividad rural y garantizar el paso seguro sobre el río durante todo el año..</p>
+                    
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-title">Caja Puente</div>
+                    <img src="file:///home/chelson/Downloads/Project/images/448628333_10159419300335882_8359851697131578311_n.jpg" alt="Caja puente" width="500" height="300" >
+                    <div class="project-info">
+                        <h3>Caja puente, Gracias, Lempira.</h3>
+                        <p>Construcción de puente vehicular de concreto reforzado para fortalecer la infraestructura vial rural y facilitar el acceso seguro entre comunidades durante todo el año.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-title">Proyecto 3</div>
+                    <img src="file:///home/chelson/Downloads/Project/images/palmerola.jpeg" alt="palmerola" width="500" height="300">
+                    <div class="project-info">
+                        <h3>Tanques de combustible Palmerola International Airport</h3>
+                        <p>Construcción e instalación de tanques de combustible en el Aeropuerto Internacional de Palmerola, con el objetivo de garantizar el almacenamiento seguro, eficiente y en cumplimiento con estándares internacionales para el abastecimiento de aeronaves.</p>
+                    </div>
+                </div>
+               
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+
+  <!-- Sección de Clientes con rutas absolutas -->
+<section class="clients" id="clients">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nuestros Clientes</h2>
+            <p>Entidades que  han confiado en nosotros</p>
+        </div>
+        <div class="clients-grid">
+            
+            
+            
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/Progresomuni.jpeg" alt="Municipalidad de El Progreso" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/Hondupalma.png" alt="Hondupalma" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/Colegioperitos.jpeg" alt="Colegio de Peritos" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/ficohosa_logo.png" alt="Ficohsa" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/IPM_logo.png" alt="IPM" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/IICA.png" alt="IICA" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/Palmerola.png" alt="Palmerola" width="100%">
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="logo-container">
+                    <img src="file:///home/chelson/Downloads/Project/images/Honduras.png" alt="Honduras" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+
+    <!-- FIN DE LA SECCIÓN DE CLIENTES -->
+     <!-- Ubicación Section -->
+<section class="location" id="location">
+    <div class="container">
+        <div class="section-title">
+            <h2>Dónde Estamos Ubicados</h2>
+            <p>Visítenos en nuestras instalaciones</p>
+        </div>
+        <div class="location-container">
+            <div class="location-info">
+                <div class="location-info-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Dirección Principal</h4>
+                        <p>Col. Alameda, Bloque J, Cuarta calle 2 y 3 Avenida , Casa Numero 5, El Progreso, Yoro</p>
+                    </div>
+                </div>
+                <div class="location-info-item">
+                    <div class="contact-icon">🏭</div>
+                    <div>
+                        <h4>Plantel</h4>
+                        <p>Col. Alameda 200 mts al Sur de Texaco Guadalupana, Salida a Santa Rita, El Progreso, Yoro</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d492401.92712364905!2d-88.10505540003281!3d15.382439553800292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f66154d6291987f%3A0x9d34f1a048eaab7d!2sCasa%20Galel%20Hernandez%20Romero!5e0!3m2!1ses!2shn!4v1744684554710!5m2!1ses!2shn" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contáctenos</h2>
+                <p>Estamos a su disposición</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Dirección Principal</h4>
+                            <p>Col. Alameda, Bloque J, Cuarta calle 2 y 3 Avenida , Casa Numero 5, El Progreso, Yoro</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">🏭</div>
+                        <div>
+                            <h4>Plantel</h4>
+                            <p>Col. Alameda 200 mts al Sur de Texaco Guadalupana, Salida a Santa Rita, El Progreso, Yoro</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Teléfonos</h4>
+                            <p>Cel: (504) 9557-0384<br>Tel: (504) 2554-5943</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>galelhernandez@gmail.com<br>galelhr33@yahoo.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <h4>Horario</h4>
+                            <p>Lunes - Viernes: 8:00 AM - 6:00 PM</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envíenos un Mensaje</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nombre Completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Correo Electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Asunto" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Mensaje" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><span> </span></a>
+                <a href="#"><span> </span></a>
+                <a href="#"><span> </span></a>
+                <a href="#"><span> </span></a>
+            </div>
+            <div class="footer-nav">
+                <a href="#home">Inicio</a>
+                <a href="#about">Nosotros</a>
+                <a href="#services">Servicios</a>
+                <a href="#projects">Proyectos</a>
+                <a href="#clients">Clientes</a>
+                <a href="#location">Ubicación</a>
+                <a href="#contact">Contacto</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Servicios de Ingeniería y Construcción Galel Hernandez Romero SDRL. Todos los derechos reservados.</p>
+                <p>&copy; Developed by: @Chelson.tk</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="back-to-top">↑</a>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+        
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                navMenu.classList.remove('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    <a href="https://wa.me/50495570384" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="cta-banner" id="cta-banner">
+        <button class="cta-banner-close" id="cta-close">&times;</button>
+        <div class="container">
+            <div class="cta-banner-content">
+                <div class="cta-banner-text">¿Necesita un presupuesto para su proyecto? ¡Contáctenos hoy mismo!</div>
+                <a href="#contact" class="btn">Solicitar Ahora</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
