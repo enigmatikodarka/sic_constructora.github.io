@@ -21,6 +21,12 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
     <!-- Configuración Tailwind -->
     <script>
       tailwind.config = {
@@ -47,12 +53,6 @@
       }
     </script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         body {
             background-color: #050505;
@@ -60,24 +60,13 @@
             overflow-x: hidden;
         }
 
-        /* Scrollbar */
+        /* Scrollbar Personalizado */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #121212; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
-
-        /* Animaciones */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Patrones */
+        
+        /* Patrones de fondo */
         .bg-pattern-dots {
             background-image: radial-gradient(#333 1px, transparent 1px);
             background-size: 20px 20px;
@@ -86,21 +75,32 @@
             background-image: linear-gradient(#222 1px, transparent 1px), linear-gradient(90deg, #222 1px, transparent 1px);
             background-size: 40px 40px;
         }
-        
-        /* Preloader */
-        #preloader {
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        .bg-blueprint {
+            background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        #preloader.hidden {
+
+        /* Utilidades de animación */
+        .fade-in-up {
             opacity: 0;
-            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
-        /* Modal Transitions */
-        .modal-open { overflow: hidden; }
-        #project-modal { transition: opacity 0.3s ease; }
-        #project-modal.hidden { opacity: 0; pointer-events: none; }
-        #project-modal:not(.hidden) { opacity: 1; pointer-events: auto; }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loader */
+        .loader {
+            border: 4px solid rgba(212, 175, 55, 0.1);
+            border-left-color: #D4AF37;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 <script type="importmap">
 {
@@ -117,761 +117,833 @@
 <body class="antialiased font-sans">
 
     <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center">
-        <div class="relative">
-            <div class="w-24 h-24 border-4 border-gold/30 border-t-gold rounded-full animate-spin"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <i class="fas fa-hard-hat text-gold text-2xl"></i>
-            </div>
-        </div>
-        <h2 class="mt-8 text-xl font-display font-bold text-white tracking-widest animate-pulse">
+    <div id="preloader" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="loader mb-4"></div>
+        <h2 class="text-xl font-display font-bold text-white tracking-widest">
             GALEL <span class="text-gold">HERNANDEZ</span>
         </h2>
     </div>
 
-    <!-- Scroll Progress Bar -->
+    <!-- Scroll Progress -->
     <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gold z-[60] w-0 transition-all duration-100 ease-out"></div>
 
     <!-- Header -->
     <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group">
-                <div class="border-2 border-gold p-2 rounded-lg bg-dark-surface hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-shadow">
-                    <i class="fas fa-hard-hat text-gold text-2xl"></i>
+                <div class="relative">
+                    <div class="border-2 border-gold p-2 rounded-lg relative bg-dark-surface">
+                        <i data-lucide="hard-hat" class="text-gold w-8 h-8"></i>
+                    </div>
                 </div>
                 <div class="flex flex-col">
                     <h1 class="text-xl md:text-2xl font-display font-bold leading-none tracking-wide text-white">
                         GALEL <span class="text-gold">HERNANDEZ</span>
                     </h1>
-                    <span class="text-[10px] md:text-xs text-gold/80 uppercase tracking-widest mt-1">Ingeniería y Construcción</span>
+                    <span class="text-[10px] md:text-xs text-gold/80 uppercase tracking-widest mt-1">
+                        Ingeniería y Construcción
+                    </span>
                 </div>
             </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden lg:block">
+            <nav class="hidden md:block">
                 <ul class="flex space-x-8">
-                    <li><a href="#home" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Inicio</a></li>
-                    <li><a href="#about" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Nosotros</a></li>
-                    <li><a href="#why-us" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Ventajas</a></li>
-                    <li><a href="#services" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Servicios</a></li>
-                    <li><a href="#projects" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Proyectos</a></li>
-                    <li><a href="#clients" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Clientes</a></li>
-                    <li><a href="#contact" class="text-sm font-medium uppercase tracking-wider text-gray-300 hover:text-gold transition-colors">Contacto</a></li>
+                    <li><a href="#home" class="text-sm font-medium uppercase hover:text-gold transition-colors">Inicio</a></li>
+                    <li><a href="#about" class="text-sm font-medium uppercase hover:text-gold transition-colors">Nosotros</a></li>
+                    <li><a href="#services" class="text-sm font-medium uppercase hover:text-gold transition-colors">Servicios</a></li>
+                    <li><a href="#projects" class="text-sm font-medium uppercase hover:text-gold transition-colors">Proyectos</a></li>
+                    <li><a href="#clients" class="text-sm font-medium uppercase hover:text-gold transition-colors">Clientes</a></li>
+                    <li><a href="#contact" class="text-sm font-medium uppercase hover:text-gold transition-colors">Contacto</a></li>
                 </ul>
             </nav>
 
-            <!-- Mobile Toggle -->
-            <button id="menu-toggle" class="lg:hidden text-white hover:text-gold transition-colors text-2xl">
-                <i class="fas fa-bars"></i>
+            <button id="menu-toggle" class="md:hidden text-white hover:text-gold">
+                <i data-lucide="menu" class="w-8 h-8"></i>
             </button>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-dark-surface border-b border-gold/20 absolute w-full top-full left-0">
-            <nav class="flex flex-col py-4">
-                <a href="#home" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Inicio</a>
-                <a href="#about" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Nosotros</a>
-                <a href="#why-us" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Ventajas</a>
-                <a href="#services" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Servicios</a>
-                <a href="#projects" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Proyectos</a>
-                <a href="#clients" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Clientes</a>
-                <a href="#contact" class="px-6 py-3 text-white hover:bg-gold/10 hover:text-gold">Contacto</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-surface border-b border-gold/20 absolute w-full top-full left-0">
+            <nav class="flex flex-col py-6">
+                <a href="#home" class="mobile-link px-6 py-4 text-center text-white hover:text-gold">Inicio</a>
+                <a href="#about" class="mobile-link px-6 py-4 text-center text-white hover:text-gold">Nosotros</a>
+                <a href="#services" class="mobile-link px-6 py-4 text-center text-white hover:text-gold">Servicios</a>
+                <a href="#projects" class="mobile-link px-6 py-4 text-center text-white hover:text-gold">Proyectos</a>
+                <a href="#clients" class="mobile-link px-6 py-4 text-center text-white hover:text-gold">Clientes</a>
+                <a href="#contact" class="mobile-link px-6 py-4 text-center text-white hover:text-gold">Contacto</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Construction" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
-                <div class="absolute inset-0 opacity-20 bg-pattern-dots"></div>
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Construction" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
+            <div class="absolute inset-0 bg-pattern-dots opacity-20"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center fade-in-up">
+            <div class="inline-block border border-gold/50 rounded-full px-4 py-1 mb-6 bg-black/40 backdrop-blur-sm">
+                <span class="text-gold text-sm font-semibold tracking-wider uppercase">Excelencia en Ingeniería</span>
             </div>
-
-            <div class="container mx-auto px-6 relative z-10 text-center mt-10">
-                <div class="inline-block border border-gold/50 rounded-full px-4 py-1 mb-6 bg-black/40 backdrop-blur-sm reveal active">
-                    <span class="text-gold text-sm font-semibold tracking-wider uppercase">Excelencia en Ingeniería</span>
-                </div>
-                
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight reveal active" style="transition-delay: 0.1s;">
-                    CONSTRUIMOS EL <br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">FUTURO DE HONDURAS</span>
-                </h1>
-                
-                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 font-light reveal active" style="transition-delay: 0.2s;">
-                    Soluciones innovadoras y de alta calidad para todos sus proyectos civiles, industriales y obras públicas.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal active" style="transition-delay: 0.3s;">
-                    <a href="#contact" class="px-8 py-4 bg-gold hover:bg-gold-dark text-black font-bold rounded shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-1">
-                        Solicitar Presupuesto
-                    </a>
-                    <a href="#projects" class="px-8 py-4 bg-transparent border border-white/30 text-white hover:bg-white/10 hover:border-white font-medium rounded transition-all">
-                        Ver Proyectos
-                    </a>
-                </div>
-            </div>
-
-            <!-- Scroll Down Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/50 animate-bounce">
-                <i class="fas fa-chevron-down text-2xl"></i>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="py-20 bg-dark-bg border-y border-white/5 relative">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div class="stat-card text-center p-6 bg-black/50 border border-white/5 hover:border-gold/30 rounded-lg transition-colors">
-                        <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display"><span class="counter" data-target="19">0</span>+</div>
-                        <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Años de Experiencia</div>
-                    </div>
-                    <div class="stat-card text-center p-6 bg-black/50 border border-white/5 hover:border-gold/30 rounded-lg transition-colors">
-                        <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display"><span class="counter" data-target="150">0</span>+</div>
-                        <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Proyectos Ejecutados</div>
-                    </div>
-                    <div class="stat-card text-center p-6 bg-black/50 border border-white/5 hover:border-gold/30 rounded-lg transition-colors">
-                        <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display"><span class="counter" data-target="50">0</span>+</div>
-                        <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Colaboradores Expertos</div>
-                    </div>
-                    <div class="stat-card text-center p-6 bg-black/50 border border-white/5 hover:border-gold/30 rounded-lg transition-colors">
-                        <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display"><span class="counter" data-target="100">0</span>%</div>
-                        <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Clientes Satisfechos</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-20 md:py-28 bg-pattern-dots">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">
-                        Sobre Nosotros
-                        <span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span>
-                    </h2>
-                    <p class="text-gray-400 mt-6 max-w-2xl mx-auto">Comprometidos con la excelencia y la seguridad en cada obra</p>
-                </div>
-
-                <div class="flex flex-col lg:flex-row items-center gap-12 reveal">
-                    <div class="lg:w-1/2">
-                        <h3 class="text-2xl font-bold text-white mb-4">¿Quiénes Somos?</h3>
-                        <div class="space-y-4 text-gray-400 leading-relaxed">
-                            <p><strong class="text-gold">Servicios de Ingeniería y Construcción Galel Hernandez Romero S.de R.L.de C.V</strong> es una empresa líder en el sector de la construcción e ingeniería, con amplia experiencia en el desarrollo de proyectos civiles, industriales y comerciales.</p>
-                            <p>Fundada en 2006, nos hemos destacado por ofrecer soluciones innovadoras, eficientes y sostenibles, cumpliendo con los más altos estándares de calidad y seguridad.</p>
-                        </div>
-                    </div>
-                    <div class="lg:w-1/2 relative">
-                        <div class="absolute top-4 left-4 w-full h-full border-2 border-gold/30 rounded-lg transform translate-x-4 translate-y-4 -z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Ingenieros" class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition-all duration-500">
-                    </div>
-                </div>
-                
-                <!-- Mission/Vision -->
-                <div class="grid md:grid-cols-2 gap-8 mt-16 reveal">
-                    <div class="bg-dark-bg p-8 rounded-xl border border-white/10 hover:border-gold/50 transition-colors group">
-                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6 text-gold text-xl"><i class="fas fa-eye"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-4">Nuestra Visión</h3>
-                        <p class="text-gray-400">Ser reconocidos como líderes en la industria de la construcción e ingeniería, destacándonos por nuestra excelencia, innovación y compromiso con el desarrollo sostenible.</p>
-                    </div>
-                    <div class="bg-dark-bg p-8 rounded-xl border border-white/10 hover:border-gold/50 transition-colors group">
-                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6 text-gold text-xl"><i class="fas fa-bullseye"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-4">Nuestra Misión</h3>
-                        <p class="text-gray-400">Proporcionar soluciones integrales de ingeniería y construcción que superen las expectativas de nuestros clientes con integridad y pasión.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications Strip -->
-        <div class="bg-dark-surface border-y border-white/5 py-10">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-4 opacity-70 hover:opacity-100 transition-opacity">
-                    <div class="flex items-center gap-3"><i class="fas fa-award text-4xl text-gray-500 hover:text-gold transition-colors"></i><span class="text-sm font-semibold text-gray-400 uppercase">ISO 9001:2015</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-shield-alt text-4xl text-gray-500 hover:text-gold transition-colors"></i><span class="text-sm font-semibold text-gray-400 uppercase">Seguridad Industrial</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-leaf text-4xl text-gray-500 hover:text-gold transition-colors"></i><span class="text-sm font-semibold text-gray-400 uppercase">Construcción Sostenible</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-check-circle text-4xl text-gray-500 hover:text-gold transition-colors"></i><span class="text-sm font-semibold text-gray-400 uppercase">Control de Calidad</span></div>
-                </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight">
+                CONSTRUIMOS EL <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">FUTURO DE HONDURAS</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 font-light">
+                Soluciones innovadoras y de alta calidad para todos sus proyectos civiles, industriales y obras públicas.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="px-8 py-4 bg-gold hover:bg-gold-dark text-black font-bold rounded shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-1">Solicitar Presupuesto</a>
+                <a href="#projects" class="px-8 py-4 bg-transparent border border-white/30 text-white hover:bg-white/10 font-medium rounded transition-all">Ver Proyectos</a>
             </div>
         </div>
 
-        <!-- Why Choose Us -->
-        <section id="why-us" class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">¿Por Qué Elegirnos?<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/50 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-dark-bg border-y border-white/5 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-gold/5 pointer-events-none"></div>
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Stat 1 -->
+                <div class="text-center p-6 bg-black/50 backdrop-blur-sm rounded-lg border border-white/5">
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display counter" data-target="19">0</div>
+                    <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Años de Experiencia</div>
                 </div>
-                <div class="flex flex-col lg:flex-row items-center gap-16 reveal">
-                    <div class="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all">
-                            <i class="fas fa-clock text-gold text-3xl mb-4"></i>
-                            <h3 class="text-lg font-bold text-white mb-2">Cumplimiento de Plazos</h3>
-                            <p class="text-gray-400 text-sm">Garantizamos entregas puntuales mediante una planificación rigurosa.</p>
-                        </div>
-                        <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all">
-                            <i class="fas fa-file-contract text-gold text-3xl mb-4"></i>
-                            <h3 class="text-lg font-bold text-white mb-2">Transparencia Total</h3>
-                            <p class="text-gray-400 text-sm">Presupuestos claros y detallados sin costos ocultos.</p>
-                        </div>
-                        <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all">
-                            <i class="fas fa-users-cog text-gold text-3xl mb-4"></i>
-                            <h3 class="text-lg font-bold text-white mb-2">Personal Calificado</h3>
-                            <p class="text-gray-400 text-sm">Ingenieros y técnicos con amplia trayectoria y certificación.</p>
-                        </div>
-                        <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all">
-                            <i class="fas fa-bolt text-gold text-3xl mb-4"></i>
-                            <h3 class="text-lg font-bold text-white mb-2">Respuesta Inmediata</h3>
-                            <p class="text-gray-400 text-sm">Capacidad de reacción rápida ante imprevistos en obra.</p>
-                        </div>
-                    </div>
-                    <div class="lg:w-1/2 relative">
-                         <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Why us" class="rounded-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
-                    </div>
+                <!-- Stat 2 -->
+                <div class="text-center p-6 bg-black/50 backdrop-blur-sm rounded-lg border border-white/5">
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display flex justify-center"><span class="counter" data-target="150">0</span>+</div>
+                    <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Proyectos Ejecutados</div>
+                </div>
+                <!-- Stat 3 -->
+                <div class="text-center p-6 bg-black/50 backdrop-blur-sm rounded-lg border border-white/5">
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display flex justify-center"><span class="counter" data-target="50">0</span>+</div>
+                    <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Colaboradores Expertos</div>
+                </div>
+                <!-- Stat 4 -->
+                <div class="text-center p-6 bg-black/50 backdrop-blur-sm rounded-lg border border-white/5">
+                    <div class="text-4xl md:text-5xl font-bold text-gold mb-2 font-display flex justify-center"><span class="counter" data-target="100">0</span>%</div>
+                    <div class="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">Clientes Satisfechos</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Process Section -->
-        <section id="process" class="py-20 bg-dark-surface">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">Nuestro Proceso<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
-                </div>
-                <div class="mt-12 relative reveal">
-                    <!-- Line -->
-                    <div class="hidden lg:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="relative group text-center">
-                            <div class="w-16 h-16 mx-auto bg-gold/10 rounded-full flex items-center justify-center text-gold mb-6 relative z-10 border border-dark-surface group-hover:scale-110 transition-transform"><i class="fas fa-clipboard-list text-2xl"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-3">1. Planificación</h3>
-                            <p class="text-gray-400 text-sm">Análisis técnico de viabilidad y presupuestación.</p>
-                        </div>
-                        <div class="relative group text-center">
-                            <div class="w-16 h-16 mx-auto bg-gold/10 rounded-full flex items-center justify-center text-gold mb-6 relative z-10 border border-dark-surface group-hover:scale-110 transition-transform"><i class="fas fa-drafting-compass text-2xl"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-3">2. Diseño</h3>
-                            <p class="text-gray-400 text-sm">Elaboración de planos arquitectónicos y estructurales.</p>
-                        </div>
-                        <div class="relative group text-center">
-                            <div class="w-16 h-16 mx-auto bg-gold/10 rounded-full flex items-center justify-center text-gold mb-6 relative z-10 border border-dark-surface group-hover:scale-110 transition-transform"><i class="fas fa-hammer text-2xl"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-3">3. Construcción</h3>
-                            <p class="text-gray-400 text-sm">Ejecución de obra con supervisión y normas de calidad.</p>
-                        </div>
-                        <div class="relative group text-center">
-                            <div class="w-16 h-16 mx-auto bg-gold/10 rounded-full flex items-center justify-center text-gold mb-6 relative z-10 border border-dark-surface group-hover:scale-110 transition-transform"><i class="fas fa-key text-2xl"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-3">4. Entrega</h3>
-                            <p class="text-gray-400 text-sm">Revisión final y entrega llave en mano al cliente.</p>
-                        </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark-bg relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block text-white">
+                    Sobre Nosotros
+                    <span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span>
+                </h2>
+                <p class="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">Comprometidos con la excelencia y la seguridad en cada obra</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-12 fade-in-up">
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold text-white mb-4">¿Quiénes Somos?</h3>
+                    <div class="space-y-4 text-gray-400 leading-relaxed">
+                        <p>
+                            <strong class="text-gold">Servicios de Ingeniería y Construcción Galel Hernandez Romero S.de R.L.de C.V</strong> es una empresa líder en el sector de la construcción e ingeniería, fundada en 2006.
+                        </p>
+                        <p>
+                            Nos hemos destacado por ofrecer soluciones innovadoras, eficientes y sostenibles, cumpliendo con los más altos estándares de calidad y seguridad.
+                        </p>
+                        <p>
+                            Nuestra capacidad operativa incluye un equipo técnico especializado, lo que nos permite garantizar resultados excepcionales en tiempos óptimos.
+                        </p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Safety Section -->
-        <section class="py-16 bg-black border-y border-white/5 overflow-hidden">
-             <div class="container mx-auto px-6 reveal">
-                 <div class="flex flex-col md:flex-row items-center gap-12">
-                     <div class="md:w-1/2">
-                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-bold uppercase mb-4">
-                             <i class="fas fa-shield-alt"></i> Seguridad Industrial
-                         </div>
-                         <h3 class="text-3xl md:text-4xl font-display font-bold text-white mb-6">Primero la Seguridad,<br /><span class="text-gray-500">Sin Excepciones.</span></h3>
-                         <p class="text-gray-400 mb-8">Implementamos rigurosos protocolos HSE para proteger a nuestro equipo y garantizar obras sin incidentes.</p>
-                         <ul class="grid grid-cols-2 gap-4 text-sm text-gray-300">
-                             <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-gold"></div> EPP Certificado</li>
-                             <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-gold"></div> Charlas Diarias</li>
-                             <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-gold"></div> Señalización Normada</li>
-                             <li class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-gold"></div> Gestión Ambiental</li>
-                         </ul>
-                     </div>
-                     <div class="md:w-1/2 grid grid-cols-2 gap-4">
-                         <div class="bg-dark-surface p-6 rounded-xl border border-white/10 text-center hover:translate-y-[-5px] transition-transform">
-                             <i class="fas fa-hard-hat text-gold text-3xl mb-3"></i>
-                             <h4 class="text-white font-bold">Cero Accidentes</h4>
-                         </div>
-                         <div class="bg-dark-surface p-6 rounded-xl border border-white/10 text-center hover:translate-y-[-5px] transition-transform mt-8">
-                             <i class="fas fa-clipboard-check text-gold text-3xl mb-3"></i>
-                             <h4 class="text-white font-bold">Normativa</h4>
-                         </div>
-                         <div class="bg-dark-surface p-6 rounded-xl border border-white/10 text-center hover:translate-y-[-5px] transition-transform">
-                             <i class="fas fa-exclamation-triangle text-gold text-3xl mb-3"></i>
-                             <h4 class="text-white font-bold">Prevención</h4>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-        </section>
-
-        <!-- Timeline -->
-        <section id="history" class="py-20 bg-dark-surface">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">Nuestra Trayectoria<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute top-4 left-4 w-full h-full border-2 border-gold/30 rounded-lg transform translate-x-4 translate-y-4 -z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Ingenieros" class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full">
                 </div>
-                <div class="relative max-w-4xl mx-auto mt-12 reveal">
-                    <div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-800 md:transform md:-translate-x-1/2"></div>
-                    
-                    <!-- Event 2006 -->
-                    <div class="relative mb-12 flex flex-col md:flex-row items-center w-full">
-                        <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-10 mb-4 md:mb-0 text-left md:text-right">
-                            <div class="bg-black p-6 rounded-xl border border-white/10">
-                                <span class="text-gold text-2xl font-bold block mb-2">2006</span>
-                                <h4 class="text-xl font-bold text-white mb-2">Fundación</h4>
-                                <p class="text-gray-400 text-sm">Inicia operaciones Servicios de Ingeniería y Construcción Galel Hernandez.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Strip -->
+    <div class="bg-dark-surface border-y border-white/5 py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-4 opacity-70 hover:opacity-100 transition-opacity">
+                <div class="flex items-center gap-3 group">
+                    <i data-lucide="award" class="text-gray-500 group-hover:text-gold w-10 h-10"></i>
+                    <span class="text-sm font-semibold text-gray-400 group-hover:text-white uppercase tracking-wider">ISO 9001:2015</span>
+                </div>
+                <div class="flex items-center gap-3 group">
+                    <i data-lucide="shield-check" class="text-gray-500 group-hover:text-gold w-10 h-10"></i>
+                    <span class="text-sm font-semibold text-gray-400 group-hover:text-white uppercase tracking-wider">Seguridad Industrial</span>
+                </div>
+                <div class="flex items-center gap-3 group">
+                    <i data-lucide="leaf" class="text-gray-500 group-hover:text-gold w-10 h-10"></i>
+                    <span class="text-sm font-semibold text-gray-400 group-hover:text-white uppercase tracking-wider">Construcción Sostenible</span>
+                </div>
+                <div class="flex items-center gap-3 group">
+                    <i data-lucide="check-circle-2" class="text-gray-500 group-hover:text-gold w-10 h-10"></i>
+                    <span class="text-sm font-semibold text-gray-400 group-hover:text-white uppercase tracking-wider">Control de Calidad</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">¿Por Qué Elegirnos?</h2>
+                <p class="text-gray-400">Razones sólidas para confiar su proyecto a Galel Hernandez</p>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Benefit 1 -->
+                    <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all group">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-black">
+                            <i data-lucide="clock" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Cumplimiento de Plazos</h3>
+                        <p class="text-gray-400 text-sm">Garantizamos entregas puntuales mediante planificación rigurosa.</p>
+                    </div>
+                    <!-- Benefit 2 -->
+                    <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all group">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-black">
+                            <i data-lucide="file-search" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Transparencia Total</h3>
+                        <p class="text-gray-400 text-sm">Presupuestos claros sin costos ocultos y reportes constantes.</p>
+                    </div>
+                    <!-- Benefit 3 -->
+                    <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all group">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-black">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Personal Calificado</h3>
+                        <p class="text-gray-400 text-sm">Ingenieros y técnicos con amplia trayectoria profesional.</p>
+                    </div>
+                    <!-- Benefit 4 -->
+                    <div class="p-6 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all group">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-black">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Respuesta Inmediata</h3>
+                        <p class="text-gray-400 text-sm">Capacidad de reacción rápida ante imprevistos.</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Calidad" class="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8">
+                            <div class="bg-gold/20 backdrop-blur-md p-6 rounded-xl border border-gold/30">
+                                <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="text-gold w-5 h-5"></i> Garantía de Calidad
+                                </h4>
+                                <p class="text-gray-200 text-sm">
+                                    Cada proyecto pasa por 3 niveles de inspección antes de la entrega final.
+                                </p>
                             </div>
                         </div>
-                        <div class="absolute left-[20px] md:left-1/2 w-4 h-4 bg-gold rounded-full border-4 border-black transform -translate-x-1/2 z-10"></div>
-                        <div class="hidden md:block w-1/2"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Event 2012 -->
-                    <div class="relative mb-12 flex flex-col md:flex-row-reverse items-center w-full">
-                        <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-10 mb-4 md:mb-0 text-left">
-                            <div class="bg-black p-6 rounded-xl border border-white/10">
-                                <span class="text-gold text-2xl font-bold block mb-2">2012</span>
-                                <h4 class="text-xl font-bold text-white mb-2">Crecimiento Regional</h4>
-                                <p class="text-gray-400 text-sm">Expansión de servicios a nivel departamental y alianzas municipales.</p>
+    <!-- Timeline -->
+    <section id="history" class="py-20 bg-dark-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Nuestra Trayectoria</h2>
+                <p class="text-gray-400">Historia de solidez desde 2006</p>
+            </div>
+            <div class="relative max-w-4xl mx-auto mt-12">
+                <div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-800 md:transform md:-translate-x-1/2"></div>
+                
+                <!-- 2006 -->
+                <div class="relative mb-12 flex flex-col md:flex-row items-center w-full fade-in-up">
+                    <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-10 text-left md:text-right">
+                        <div class="bg-dark-surface p-6 rounded-xl border border-white/10 relative">
+                            <span class="text-gold text-2xl font-bold font-display block mb-2">2006</span>
+                            <h4 class="text-xl font-bold text-white mb-2">Fundación</h4>
+                            <p class="text-gray-400 text-sm">Inicia operaciones Servicios de Ingeniería y Construcción Galel Hernandez.</p>
+                            <div class="hidden md:block absolute top-1/2 -mt-2 w-4 h-4 bg-dark-surface border-t border-r border-white/10 transform rotate-45 -right-2.5"></div>
+                        </div>
+                    </div>
+                    <div class="absolute left-[20px] md:left-1/2 w-4 h-4 bg-gold rounded-full border-4 border-black transform -translate-x-1/2 z-10"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+
+                <!-- 2012 -->
+                <div class="relative mb-12 flex flex-col md:flex-row-reverse items-center w-full fade-in-up">
+                    <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-10 text-left">
+                        <div class="bg-dark-surface p-6 rounded-xl border border-white/10 relative">
+                            <span class="text-gold text-2xl font-bold font-display block mb-2">2012</span>
+                            <h4 class="text-xl font-bold text-white mb-2">Crecimiento Regional</h4>
+                            <p class="text-gray-400 text-sm">Expansión de servicios y alianzas estratégicas con municipalidades.</p>
+                            <div class="hidden md:block absolute top-1/2 -mt-2 w-4 h-4 bg-dark-surface border-t border-r border-white/10 transform rotate-45 -left-2.5 border-t-0 border-r-0 border-b border-l"></div>
+                        </div>
+                    </div>
+                    <div class="absolute left-[20px] md:left-1/2 w-4 h-4 bg-gold rounded-full border-4 border-black transform -translate-x-1/2 z-10"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+
+                <!-- 2022 -->
+                <div class="relative mb-12 flex flex-col md:flex-row items-center w-full fade-in-up">
+                    <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-10 text-left md:text-right">
+                        <div class="bg-dark-surface p-6 rounded-xl border border-white/10 relative">
+                            <span class="text-gold text-2xl font-bold font-display block mb-2">2022</span>
+                            <h4 class="text-xl font-bold text-white mb-2">Tanques Palmerola</h4>
+                            <p class="text-gray-400 text-sm">Ejecución exitosa de infraestructura crítica en Aeropuerto Internacional.</p>
+                            <div class="hidden md:block absolute top-1/2 -mt-2 w-4 h-4 bg-dark-surface border-t border-r border-white/10 transform rotate-45 -right-2.5"></div>
+                        </div>
+                    </div>
+                    <div class="absolute left-[20px] md:left-1/2 w-4 h-4 bg-gold rounded-full border-4 border-black transform -translate-x-1/2 z-10"></div>
+                    <div class="hidden md:block w-1/2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Nuestros Servicios</h2>
+                <p class="text-gray-400">Soluciones integrales de infraestructura</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service 1 -->
+                <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
+                    <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform">
+                        <i data-lucide="hard-hat" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Construcción Civil</h3>
+                    <p class="text-gray-400 text-sm">Proyectos residenciales, comerciales e industriales de alta calidad.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
+                    <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform">
+                        <i data-lucide="pencil-ruler" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Diseño Arquitectónico</h3>
+                    <p class="text-gray-400 text-sm">Diseños innovadores y funcionales adaptados al cliente.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
+                    <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform">
+                        <i data-lucide="briefcase" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Consultoría</h3>
+                    <p class="text-gray-400 text-sm">Asesoramiento especializado en todas las etapas del proyecto.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
+                    <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform">
+                        <i data-lucide="wrench" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Mantenimiento</h3>
+                    <p class="text-gray-400 text-sm">Servicios preventivos y correctivos para instalaciones.</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
+                    <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform">
+                        <i data-lucide="truck" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Obras Públicas</h3>
+                    <p class="text-gray-400 text-sm">Carreteras, puentes y sistemas de saneamiento.</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
+                    <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform">
+                        <i data-lucide="leaf" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Sostenibilidad</h3>
+                    <p class="text-gray-400 text-sm">Prácticas que minimizan el impacto ambiental.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark-surface bg-pattern-grid">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Proyectos Destacados</h2>
+                <p class="text-gray-400">Excelencia técnica representada</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12" id="project-filters">
+                <button class="filter-btn active px-6 py-2 rounded-full border text-sm font-medium transition-all bg-gold border-gold text-black" data-filter="Todos">Todos</button>
+                <button class="filter-btn px-6 py-2 rounded-full border text-sm font-medium transition-all bg-transparent border-white/20 text-gray-400 hover:border-gold/50 hover:text-white" data-filter="Infraestructura">Infraestructura</button>
+                <button class="filter-btn px-6 py-2 rounded-full border text-sm font-medium transition-all bg-transparent border-white/20 text-gray-400 hover:border-gold/50 hover:text-white" data-filter="Industrial">Industrial</button>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section (Logos with Code) -->
+    <section id="clients" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Nuestros Clientes</h2>
+                <p class="text-gray-400">Entidades que confían en nuestra solidez</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Muni El Progreso -->
+                <div class="h-32 bg-dark-surface rounded-lg flex flex-col items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group">
+                    <i data-lucide="landmark" class="text-gold mb-1 opacity-80 group-hover:opacity-100 w-8 h-8"></i>
+                    <div class="text-center leading-none">
+                        <span class="block text-[8px] tracking-widest uppercase text-gray-500">Municipalidad de</span>
+                        <span class="block font-bold text-sm tracking-tighter text-gray-300 group-hover:text-white">EL PROGRESO</span>
+                    </div>
+                </div>
+                <!-- Hondupalma -->
+                <div class="h-32 bg-dark-surface rounded-lg flex items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group gap-2">
+                    <i data-lucide="leaf" class="text-gold w-7 h-7"></i>
+                    <div class="flex flex-col leading-none">
+                        <span class="font-extrabold text-gray-300 tracking-tight text-lg group-hover:text-white">HONDU</span>
+                        <span class="font-light text-gold tracking-widest text-xs">PALMA</span>
+                    </div>
+                </div>
+                <!-- Ficohsa -->
+                <div class="h-32 bg-dark-surface rounded-lg flex items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group gap-2">
+                    <div class="grid grid-cols-2 gap-0.5">
+                        <div class="w-2 h-2 bg-gold/60 group-hover:bg-gold"></div>
+                        <div class="w-2 h-2 bg-white/40 group-hover:bg-white"></div>
+                        <div class="w-2 h-2 bg-gold/40 group-hover:bg-gold/80"></div>
+                        <div class="w-2 h-2 bg-gold/60 group-hover:bg-gold"></div>
+                    </div>
+                    <span class="font-sans font-bold text-gray-200 text-xl tracking-tight group-hover:text-white">Ficohsa</span>
+                </div>
+                <!-- Palmerola -->
+                <div class="h-32 bg-dark-surface rounded-lg flex flex-col items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group">
+                    <i data-lucide="plane" class="text-gold mb-1 transform -rotate-45 w-8 h-8"></i>
+                    <span class="font-light text-gray-300 uppercase tracking-[0.15em] text-xs text-center group-hover:text-white">Palmerola</span>
+                    <span class="text-[6px] text-gray-600 uppercase tracking-widest group-hover:text-gold">International Airport</span>
+                </div>
+                <!-- Gobierno -->
+                <div class="h-32 bg-dark-surface rounded-lg flex flex-col items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group">
+                    <div class="relative w-16 h-8 mb-1 flex justify-center text-[10px] text-gold gap-1">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <span class="font-serif font-bold text-gray-400 text-xs text-center uppercase leading-tight group-hover:text-white">Gobierno de<br/>Honduras</span>
+                </div>
+                <!-- IPM -->
+                <div class="h-32 bg-dark-surface rounded-lg flex items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group gap-2">
+                    <i data-lucide="shield" class="text-gold w-8 h-8"></i>
+                    <div class="flex flex-col border-l-2 border-gray-700 pl-2">
+                        <span class="font-black text-xl text-gray-300 leading-none group-hover:text-white">IPM</span>
+                        <span class="text-[6px] font-bold text-gray-500 tracking-wide">PREVISIÓN MILITAR</span>
+                    </div>
+                </div>
+                 <!-- CICH -->
+                 <div class="h-32 bg-dark-surface rounded-lg flex flex-col items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group">
+                    <i data-lucide="ruler" class="text-gray-400 group-hover:text-white w-8 h-8 mb-1"></i>
+                    <span class="font-black text-gray-300 text-xl tracking-wide group-hover:text-gold">CICH</span>
+                </div>
+                 <!-- IICA -->
+                 <div class="h-32 bg-dark-surface rounded-lg flex flex-col items-center justify-center p-4 border border-white/5 hover:border-gold hover:shadow-lg hover:shadow-gold/10 transition-all group">
+                    <div class="flex items-center gap-1 mb-1">
+                        <i data-lucide="globe" class="text-gray-400 group-hover:text-white w-6 h-6"></i>
+                    </div>
+                    <span class="font-bold text-gray-500 tracking-[0.2em] group-hover:text-gold">IICA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-dark-surface bg-pattern-dots">
+        <div class="container mx-auto px-6 max-w-4xl text-center relative">
+            <i data-lucide="quote" class="w-20 h-20 text-gold opacity-10 absolute top-0 left-0"></i>
+            <h2 class="text-3xl font-display font-bold text-white mb-12">Lo Que Dicen Nuestros Clientes</h2>
+            
+            <div id="testimonial-container" class="relative min-h-[250px] flex items-center justify-center">
+                <!-- Content injected via JS -->
+            </div>
+
+            <div class="flex justify-center gap-4 mt-8">
+                <button id="prev-testimonial" class="p-2 rounded-full border border-white/20 hover:bg-gold hover:text-black hover:border-gold transition-colors text-white"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                <button id="next-testimonial" class="p-2 rounded-full border border-white/20 hover:bg-gold hover:text-black hover:border-gold transition-colors text-white"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="text-3xl font-display font-bold text-white mb-12 text-center">Preguntas Frecuentes</h2>
+            <div class="space-y-4" id="faq-container">
+                <!-- FAQs injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section id="location" class="py-20 bg-dark-surface">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-display font-bold text-white mb-12 text-center">Ubicación</h2>
+            <div class="flex flex-col lg:flex-row gap-10">
+                <div class="lg:w-1/3 space-y-6">
+                    <div class="bg-black p-6 rounded-lg border border-white/10 hover:border-gold/50 transition-colors">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-gold/10 rounded-full text-gold shrink-0"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="text-gold font-bold mb-2">Dirección Principal</h4>
+                                <p class="text-gray-400 text-sm">Col. Alameda, Bloque J, Cuarta calle 2 y 3 Avenida , Casa Numero 5, El Progreso, Yoro</p>
                             </div>
                         </div>
-                        <div class="absolute left-[20px] md:left-1/2 w-4 h-4 bg-gold rounded-full border-4 border-black transform -translate-x-1/2 z-10"></div>
-                        <div class="hidden md:block w-1/2"></div>
                     </div>
-
-                    <!-- Event 2022 -->
-                    <div class="relative mb-12 flex flex-col md:flex-row items-center w-full">
-                        <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-10 mb-4 md:mb-0 text-left md:text-right">
-                            <div class="bg-black p-6 rounded-xl border border-white/10">
-                                <span class="text-gold text-2xl font-bold block mb-2">2022</span>
-                                <h4 class="text-xl font-bold text-white mb-2">Hito en Infraestructura</h4>
-                                <p class="text-gray-400 text-sm">Ejecución exitosa de tanques de combustible en Aeropuerto Palmerola.</p>
+                    <div class="bg-black p-6 rounded-lg border border-white/10 hover:border-gold/50 transition-colors">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-gold/10 rounded-full text-gold shrink-0"><i data-lucide="warehouse" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="text-gold font-bold mb-2">Plantel</h4>
+                                <p class="text-gray-400 text-sm">Col. Alameda 200 mts al Sur de Texaco Guadalupana, Salida a Santa Rita, El Progreso, Yoro</p>
                             </div>
                         </div>
-                        <div class="absolute left-[20px] md:left-1/2 w-4 h-4 bg-gold rounded-full border-4 border-black transform -translate-x-1/2 z-10"></div>
-                        <div class="hidden md:block w-1/2"></div>
                     </div>
+                </div>
+                <div class="lg:w-2/3 h-[400px] bg-gray-900 rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d492401.92712364905!2d-88.10505540003281!3d15.382439553800292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f66154d6291987f%3A0x9d34f1a048eaab7d!2sCasa%20Galel%20Hernandez%20Romero!5e0!3m2!1ses!2shn!4v1744684554710!5m2!1ses!2shn" width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Services Section -->
-        <section id="services" class="py-20 bg-black bg-pattern-grid">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">Nuestros Servicios<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
-                    <!-- Service 1 -->
-                    <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
-                        <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform"><i class="fas fa-hard-hat text-2xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Construcción Civil</h3>
-                        <p class="text-gray-400 text-sm">Proyectos residenciales, comerciales e industriales con altos estándares.</p>
-                    </div>
-                    <!-- Service 2 -->
-                    <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
-                        <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform"><i class="fas fa-pencil-ruler text-2xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Diseño Arquitectónico</h3>
-                        <p class="text-gray-400 text-sm">Diseños innovadores y funcionales adaptados a necesidades específicas.</p>
-                    </div>
-                    <!-- Service 3 -->
-                    <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
-                        <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform"><i class="fas fa-briefcase text-2xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Consultoría</h3>
-                        <p class="text-gray-400 text-sm">Asesoramiento especializado en todas las etapas del proyecto.</p>
-                    </div>
-                    <!-- Service 4 -->
-                    <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
-                        <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform"><i class="fas fa-tools text-2xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Mantenimiento</h3>
-                        <p class="text-gray-400 text-sm">Servicios preventivos y correctivos para durabilidad de instalaciones.</p>
-                    </div>
-                    <!-- Service 5 -->
-                    <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
-                        <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform"><i class="fas fa-leaf text-2xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Construcción Sostenible</h3>
-                        <p class="text-gray-400 text-sm">Prácticas que minimizan el impacto ambiental.</p>
-                    </div>
-                    <!-- Service 6 -->
-                    <div class="group p-8 bg-dark-surface rounded-xl border border-white/5 hover:border-gold transition-all duration-300">
-                        <div class="w-14 h-14 bg-gold rounded-full flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform"><i class="fas fa-road text-2xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">Obras Públicas</h3>
-                        <p class="text-gray-400 text-sm">Infraestructura pública, carreteras y puentes.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-20 bg-dark-surface">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">Proyectos Destacados<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
-                    <p class="text-gray-400 mt-6">Una muestra de nuestra experiencia y calidad en ejecución</p>
-                </div>
-
-                <!-- Filters -->
-                <div class="flex flex-wrap justify-center gap-2 mb-12 reveal">
-                    <button class="filter-btn active px-6 py-2 rounded-full border text-sm font-medium transition-all duration-300 bg-gold border-gold text-black" data-filter="all">Todos</button>
-                    <button class="filter-btn px-6 py-2 rounded-full border border-white/20 text-gray-400 hover:border-gold hover:text-white bg-transparent transition-all duration-300" data-filter="Infraestructura">Infraestructura</button>
-                    <button class="filter-btn px-6 py-2 rounded-full border border-white/20 text-gray-400 hover:border-gold hover:text-white bg-transparent transition-all duration-300" data-filter="Industrial">Industrial</button>
-                </div>
-
-                <!-- Grid -->
-                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
-                    <!-- Projects injected via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section id="testimonials" class="py-20 bg-black bg-pattern-dots">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">Testimonios<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
-                </div>
-                <div class="max-w-4xl mx-auto relative px-12 reveal">
-                    <div class="absolute top-0 left-0 opacity-10 text-gold text-9xl leading-none font-serif">"</div>
-                    <div id="testimonial-container" class="text-center">
-                        <!-- Content injected via JS -->
-                    </div>
-                    <button id="prev-testi" class="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-black/50 border border-white/10 rounded-full text-white hover:bg-gold hover:text-black transition-all"><i class="fas fa-chevron-left"></i></button>
-                    <button id="next-testi" class="absolute right-0 top-1/2 -translate-y-1/2 p-2 bg-black/50 border border-white/10 rounded-full text-white hover:bg-gold hover:text-black transition-all"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Clients -->
-        <section id="clients" class="py-16 bg-dark-surface border-t border-white/5">
-             <div class="container mx-auto px-6">
-                 <div class="text-center mb-10 reveal">
-                     <h2 class="text-2xl font-bold mb-4">Confían en Nosotros</h2>
-                 </div>
-                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
-                     <div class="h-24 bg-black border border-white/5 rounded flex items-center justify-center p-4 hover:border-gold transition-colors"><span class="text-gray-500 font-bold">Muni. El Progreso</span></div>
-                     <div class="h-24 bg-black border border-white/5 rounded flex items-center justify-center p-4 hover:border-gold transition-colors"><span class="text-gray-500 font-bold">Hondupalma</span></div>
-                     <div class="h-24 bg-black border border-white/5 rounded flex items-center justify-center p-4 hover:border-gold transition-colors"><span class="text-gray-500 font-bold">Ficohsa</span></div>
-                     <div class="h-24 bg-black border border-white/5 rounded flex items-center justify-center p-4 hover:border-gold transition-colors"><span class="text-gray-500 font-bold">Palmerola Intl.</span></div>
-                 </div>
-             </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq" class="py-20 bg-black">
-             <div class="container mx-auto px-6">
-                 <div class="text-center mb-16 reveal">
-                     <h2 class="text-3xl font-display font-bold mb-4">Preguntas Frecuentes</h2>
-                 </div>
-                 <div class="max-w-3xl mx-auto space-y-4 reveal" id="faq-container">
-                     <!-- FAQs injected via JS -->
-                 </div>
-             </div>
-        </section>
-
-        <!-- Location -->
-        <section id="location" class="py-20 bg-dark-surface">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col lg:flex-row gap-10">
-                    <div class="lg:w-1/3 space-y-6">
-                        <h3 class="text-2xl font-bold text-white mb-6">Ubicación</h3>
-                        <div class="bg-black p-6 rounded-lg border border-white/10">
-                            <div class="flex items-start gap-4">
-                                <i class="fas fa-map-marker-alt text-gold mt-1"></i>
-                                <div><h4 class="text-gold font-bold mb-2">Dirección Principal</h4><p class="text-gray-400 text-sm">Col. Alameda, Bloque J, Cuarta calle 2 y 3 Avenida, Casa 5, El Progreso, Yoro</p></div>
-                            </div>
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-black bg-pattern-dots">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl font-display font-bold text-white mb-12 text-center">Contáctenos</h2>
+            <div class="bg-dark-surface p-8 rounded-xl border border-white/10 shadow-2xl max-w-2xl mx-auto">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm text-gray-400">Nombre Completo</label>
+                            <input type="text" required class="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors">
                         </div>
-                        <div class="bg-black p-6 rounded-lg border border-white/10">
-                             <div class="flex items-start gap-4">
-                                 <i class="fas fa-industry text-gold mt-1"></i>
-                                 <div><h4 class="text-gold font-bold mb-2">Plantel</h4><p class="text-gray-400 text-sm">Col. Alameda 200 mts al Sur de Texaco Guadalupana, Salida a Santa Rita</p></div>
-                             </div>
+                        <div class="space-y-2">
+                            <label class="text-sm text-gray-400">Correo Electrónico</label>
+                            <input type="email" required class="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors">
                         </div>
                     </div>
-                    <div class="lg:w-2/3 h-[400px] bg-gray-900 rounded-xl overflow-hidden border border-white/10">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d492401.92712364905!2d-88.10505540003281!3d15.382439553800292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f66154d6291987f%3A0x9d34f1a048eaab7d!2sCasa%20Galel%20Hernandez%20Romero!5e0!3m2!1ses!2shn!4v1744684554710!5m2!1ses!2shn" width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-400">Mensaje</label>
+                        <textarea required rows="4" class="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors resize-none"></textarea>
                     </div>
-                </div>
+                    <button type="submit" class="w-full bg-gold hover:bg-gold-dark text-black font-bold py-4 rounded transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i> Enviar Mensaje
+                    </button>
+                </form>
             </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="py-20 bg-black bg-pattern-dots">
-             <div class="container mx-auto px-6">
-                 <div class="text-center mb-16 reveal">
-                     <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 relative inline-block">Contáctenos<span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gold"></span></h2>
-                 </div>
-                 <div class="max-w-4xl mx-auto bg-dark-surface p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl reveal">
-                     <form onsubmit="event.preventDefault(); alert('Mensaje enviado (simulación). Gracias por contactarnos.');" class="space-y-6">
-                         <div class="grid md:grid-cols-2 gap-6">
-                             <div><label class="text-sm text-gray-400 block mb-2">Nombre</label><input type="text" class="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-gold outline-none transition-colors" required></div>
-                             <div><label class="text-sm text-gray-400 block mb-2">Email</label><input type="email" class="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-gold outline-none transition-colors" required></div>
-                         </div>
-                         <div><label class="text-sm text-gray-400 block mb-2">Mensaje</label><textarea rows="4" class="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-gold outline-none transition-colors" required></textarea></div>
-                         <button type="submit" class="w-full bg-gold hover:bg-gold-dark text-black font-bold py-4 rounded transition-all transform hover:-translate-y-1">Enviar Mensaje</button>
-                     </form>
-                     <div class="mt-8 flex flex-col md:flex-row justify-center gap-8 text-center border-t border-white/10 pt-8">
-                         <div><i class="fas fa-phone text-gold mb-2"></i><p class="text-gray-400">(504) 9557-0384</p></div>
-                         <div><i class="fas fa-envelope text-gold mb-2"></i><p class="text-gray-400">galelhernandez@gmail.com</p></div>
-                     </div>
-                 </div>
-             </div>
-        </section>
-    </main>
+            <div class="mt-12 text-center">
+                <p class="text-gray-400 flex justify-center items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-gold"></i> (504) 9557-0384</p>
+                <p class="text-gray-400 flex justify-center items-center gap-2 mt-2"><i data-lucide="mail" class="w-4 h-4 text-gold"></i> galelhernandez@gmail.com</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-surface border-t border-white/5 py-12">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col items-center">
-                <div class="flex gap-6 mb-8">
-                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-gold hover:text-black transition-colors"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-gold hover:text-black transition-colors"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-gold hover:text-black transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <p class="text-gray-500 text-sm text-center">&copy; 2025 Servicios de Ingeniería y Construcción Galel Hernandez Romero SDRL.<br>Developed by: @Chelson.tk</p>
-            </div>
+    <footer class="bg-dark-surface border-t border-white/5 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-xs text-gray-500 mb-2">&copy; 2025 Servicios de Ingeniería y Construcción Galel Hernandez Romero SDRL.</p>
+            <p class="text-xs text-gray-600">Developed by: @Chelson.tk</p>
         </div>
     </footer>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/50495570384" target="_blank" class="fixed bottom-6 right-6 z-40 bg-[#25d366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 animate-bounce">
-        <i class="fab fa-whatsapp text-3xl"></i>
+    <!-- Whatsapp Button -->
+    <a href="https://wa.me/50495570384" target="_blank" class="fixed bottom-6 right-6 z-40 bg-[#25d366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-green-900/30 transition-all hover:scale-110 animate-bounce">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
 
-    <!-- CTA Banner -->
-    <div id="cta-banner" class="fixed bottom-0 left-0 right-0 bg-dark-surface border-t-2 border-gold shadow-[0_-5px_20px_rgba(0,0,0,0.5)] z-40 p-4 transition-transform duration-300 translate-y-full">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-center md:text-left"><h4 class="text-white font-bold">¿Tiene un proyecto en mente?</h4></div>
-            <div class="flex items-center gap-4">
-                <a href="#contact" class="bg-gold hover:bg-gold-dark text-black font-bold py-2 px-6 rounded text-sm">Solicitar Cotización</a>
-                <button onclick="document.getElementById('cta-banner').classList.add('translate-y-full')" class="text-gray-500 hover:text-white"><i class="fas fa-times"></i></button>
+    <!-- Modal Project (Hidden by default) -->
+    <div id="project-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm cursor-pointer" id="modal-backdrop"></div>
+        <div class="relative bg-dark-surface w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 shadow-2xl flex flex-col md:flex-row overflow-hidden transform scale-95 transition-transform duration-300" id="modal-content">
+            <button id="modal-close" class="absolute top-4 right-4 z-20 p-2 bg-black/50 text-white rounded-full hover:bg-gold hover:text-black transition-colors"><i data-lucide="x" class="w-5 h-5"></i></button>
+            
+            <!-- Icon Side -->
+            <div class="md:w-1/2 min-h-[300px] bg-[#0F0F0F] flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-blueprint opacity-10"></div>
+                <div id="modal-icon-container" class="relative z-10 p-8 border-4 border-dashed border-gold/40 rounded-full">
+                    <!-- Icon injected via JS -->
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Project Modal -->
-    <div id="project-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal()"></div>
-        <div class="relative bg-dark-surface w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 flex flex-col md:flex-row overflow-hidden">
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-gold hover:text-black"><i class="fas fa-times"></i></button>
-            <div class="md:w-1/2 h-64 md:h-auto"><img id="modal-img" src="" class="w-full h-full object-cover"></div>
-            <div class="md:w-1/2 p-8 flex flex-col">
-                <span id="modal-cat" class="inline-block w-max py-1 px-3 border border-gold/30 rounded-full text-xs font-bold text-gold uppercase mb-3"></span>
-                <h2 id="modal-title" class="text-2xl font-bold text-white mb-4"></h2>
-                <p id="modal-desc" class="text-gray-300 mb-6 text-sm leading-relaxed"></p>
-                <div class="space-y-3 mt-auto">
-                     <div class="flex items-center gap-3 p-3 bg-black/30 rounded border border-white/5"><i class="fas fa-user text-gold"></i><div><p class="text-xs text-gray-500 uppercase">Cliente</p><p id="modal-client" class="text-white text-sm"></p></div></div>
-                     <div class="flex items-center gap-3 p-3 bg-black/30 rounded border border-white/5"><i class="fas fa-map-marker-alt text-gold"></i><div><p class="text-xs text-gray-500 uppercase">Ubicación</p><p id="modal-location" class="text-white text-sm"></p></div></div>
-                     <div class="flex items-center gap-3 p-3 bg-black/30 rounded border border-white/5"><i class="fas fa-calendar text-gold"></i><div><p class="text-xs text-gray-500 uppercase">Año</p><p id="modal-year" class="text-white text-sm"></p></div></div>
+            
+            <!-- Info Side -->
+            <div class="md:w-1/2 p-8 md:p-10 flex flex-col">
+                <span id="modal-category" class="inline-block py-1 px-3 border border-gold/30 rounded text-xs font-bold text-gold uppercase tracking-wider mb-4 bg-gold/5 w-fit"></span>
+                <h2 id="modal-title" class="text-3xl font-display font-bold text-white mb-4 leading-tight"></h2>
+                <p id="modal-desc" class="text-gray-300 leading-relaxed mb-8 text-sm md:text-base border-l-2 border-white/10 pl-4"></p>
+                
+                <div class="grid grid-cols-1 gap-4 mt-auto">
+                    <div class="flex items-center gap-4 p-4 bg-black/40 rounded-lg border border-white/5">
+                        <div class="text-gold"><i data-lucide="user" class="w-5 h-5"></i></div>
+                        <div><p class="text-[10px] text-gray-500 uppercase font-bold">Cliente</p><p id="modal-client" class="text-white text-sm"></p></div>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-black/40 rounded-lg border border-white/5">
+                        <div class="text-gold"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                        <div><p class="text-[10px] text-gray-500 uppercase font-bold">Ubicación</p><p id="modal-location" class="text-white text-sm"></p></div>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-black/40 rounded-lg border border-white/5">
+                        <div class="text-gold"><i data-lucide="calendar" class="w-5 h-5"></i></div>
+                        <div><p class="text-[10px] text-gray-500 uppercase font-bold">Año</p><p id="modal-year" class="text-white text-sm"></p></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Logic -->
+    <!-- JavaScript Logic -->
     <script>
-        // Data
+        // Data for Projects
         const projects = [
-             { id: 1, title: 'Caja Puente Goascorán', category: 'Infraestructura', description: 'Obra de paso fronteriza para mejorar conectividad.', details: 'Infraestructura vial crítica en Valle, diseñada para alto tráfico y resistencia hidráulica.', image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', client: 'Fondo Vial', location: 'Goascorán, Valle', year: '2024' },
-             { id: 2, title: 'Caja Puente La Dalia', category: 'Infraestructura', description: 'Acceso a zonas productivas cafetaleras.', details: 'Estructura de concreto reforzado en Marcala, vital para la economía local.', image: 'https://images.unsplash.com/photo-1513828583688-6ed43003d7db?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', client: 'Muni. Marcala', location: 'Marcala, La Paz', year: '2023' },
-             { id: 3, title: 'Caja Puente San Lorenzo', category: 'Infraestructura', description: 'Gestión de caudal y tráfico vehicular sur.', details: 'Obra hidráulica mayor para prevenir inundaciones y mantener flujo vial.', image: 'https://images.unsplash.com/photo-1590403362947-a7eb269df658?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', client: 'Gobierno', location: 'San Lorenzo, Valle', year: '2024' },
-             { id: 4, title: 'Tanques Palmerola', category: 'Industrial', description: 'Sistema de combustible aeroportuario.', details: 'Instalación de tanques Jet A-1 bajo normativas internacionales en Palmerola.', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', client: 'Palmerola Int.', location: 'Comayagua', year: '2022' },
-             { id: 5, title: 'Caja Puente Yarula', category: 'Infraestructura', description: 'Puente vehicular rural de concreto.', details: 'Ingeniería estructural para soportar cargas pesadas en zona montañosa.', image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', client: 'Muni. La Paz', location: 'Yarula, La Paz', year: '2023' }
+            { id: 1, title: 'Caja Puente Goascorán', category: 'Infraestructura', icon: 'landmark', client: 'Fondo Vial', location: 'Goascorán, Valle', year: '2024', desc: 'Construcción de obra de paso para mejorar la conectividad fronteriza en Valle. Estructura de concreto reforzado diseñada para alto caudal hidráulico.' },
+            { id: 2, title: 'Caja Puente La Dalia', category: 'Infraestructura', icon: 'landmark', client: 'Municipalidad de Marcala', location: 'Marcala, La Paz', year: '2023', desc: 'Estructura de concreto reforzado para acceso a zonas productivas cafetaleras. Proyecto clave para el transporte de cosechas.' },
+            { id: 3, title: 'Caja Puente San Lorenzo', category: 'Infraestructura', icon: 'landmark', client: 'Gobierno de Honduras', location: 'San Lorenzo, Valle', year: '2024', desc: 'Obra hidráulica y vial para gestión de caudal y tráfico vehicular en zona sur. Diseñada para resistir condiciones climáticas adversas.' },
+            { id: 4, title: 'Tanques Palmerola', category: 'Industrial', icon: 'plane', client: 'Palmerola Int. Airport', location: 'Comayagua', year: '2022', desc: 'Construcción e instalación de tanques de combustible Jet A-1 bajo normativas internacionales de seguridad aeroportuaria.' },
+            { id: 5, title: 'Caja Puente Yarula', category: 'Infraestructura', icon: 'landmark', client: 'Muni. La Paz', location: 'Yarula, La Paz', year: '2023', desc: 'Construcción de un puente vehicular de concreto armado. Se utilizaron 500m³ de concreto de alta resistencia.' },
+            { id: 6, title: 'Caja Puente Gracias', category: 'Infraestructura', icon: 'landmark', client: 'Fondo Vial', location: 'Gracias, Lempira', year: '2024', desc: 'Obra civil que conecta tres comunidades. Diseño incluyó muros de contención y señalización.' }
         ];
 
+        // Data for Testimonials
         const testimonials = [
-            { name: 'Ing. Roberto Martínez', role: 'Director Infraestructura', company: 'Palmerola Airport', quote: 'La calidad técnica de Galel Hernandez ha sido excepcional en el proyecto de tanques.' },
-            { name: 'Lic. María Elena Cruz', role: 'Gerente General', company: 'Inversiones del Norte', quote: 'Su capacidad para resolver problemas complejos nos ahorró tiempo y recursos valiosos.' },
-            { name: 'Arq. Carlos Velásquez', role: 'Jefe de Proyectos', company: 'Muni. El Progreso', quote: 'Un aliado estratégico fundamental para el desarrollo vial de nuestra ciudad.' }
+            { name: 'Ing. Roberto Martínez', role: 'Director Infraestructura', company: 'Palmerola Airport', quote: 'La calidad técnica y el cumplimiento de los plazos por parte de Galel Hernandez ha sido excepcional.' },
+            { name: 'Lic. María Elena Cruz', role: 'Gerente General', company: 'Inversiones del Norte', quote: 'Su capacidad para resolver problemas complejos de ingeniería en el sitio nos ahorró tiempo y recursos valiosos.' },
+            { name: 'Arq. Carlos Velásquez', role: 'Jefe de Proyectos', company: 'Muni. El Progreso', quote: 'Un aliado estratégico fundamental para el desarrollo de la infraestructura vial de nuestra ciudad.' }
         ];
 
+        // Data for FAQ
         const faqs = [
-            { q: "¿Realizan proyectos fuera de El Progreso?", a: "Sí, operamos en todo el territorio nacional." },
-            { q: "¿Ofrecen llave en mano?", a: "Sí, desde el diseño hasta la entrega final." },
-            { q: "¿Cómo garantizan seguridad?", a: "Seguimos normas HSE estrictas y EPP completo." }
+            { q: "¿Realizan proyectos fuera de El Progreso?", a: "Sí, tenemos capacidad logística y operativa para ejecutar proyectos en todo el territorio nacional de Honduras." },
+            { q: "¿Ofrecen servicios llave en mano?", a: "Absolutamente. Podemos encargarnos desde la conceptualización y planos hasta la entrega final de la obra." },
+            { q: "¿Cómo garantizan la seguridad?", a: "Cumplimos estrictamente con normas de seguridad industrial, uso de EPP completo y supervisión constante." }
         ];
 
-        // Initialization
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
             // Preloader
-            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 1500);
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 700);
+            }, 1500);
 
-            // Render Projects
-            renderProjects('all');
-            
-            // Render Testimonial
-            renderTestimonial(0);
-            
-            // Render FAQs
-            const faqContainer = document.getElementById('faq-container');
-            faqs.forEach((item, idx) => {
-                const div = document.createElement('div');
-                div.innerHTML = `
-                    <button onclick="toggleFaq(${idx})" class="w-full flex justify-between p-6 bg-dark-surface border border-white/10 rounded mb-2 text-left hover:border-gold transition-colors">
-                        <span class="font-medium text-white">${item.q}</span>
-                        <i id="faq-icon-${idx}" class="fas fa-plus text-gold transition-transform"></i>
-                    </button>
-                    <div id="faq-ans-${idx}" class="hidden p-6 text-gray-400 border-l-2 border-gold ml-4">${item.a}</div>
-                `;
-                faqContainer.appendChild(div);
+            // Mobile Menu
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
-
-            // Stats Counter
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counters = entry.target.querySelectorAll('.counter');
-                        counters.forEach(counter => {
-                            const target = +counter.getAttribute('data-target');
-                            const inc = target / 50;
-                            let c = 0;
-                            const timer = setInterval(() => {
-                                c += inc;
-                                if (c >= target) {
-                                    counter.innerText = target;
-                                    clearInterval(timer);
-                                } else {
-                                    counter.innerText = Math.ceil(c);
-                                }
-                            }, 30);
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
             });
-            observer.observe(document.querySelector('.stat-card').parentElement);
-
-            // Reveal Animation
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-        });
-
-        // Scroll Logic
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('bg-dark-surface/95', 'backdrop-blur', 'shadow-lg');
-                header.classList.remove('py-6');
-                header.classList.add('py-3');
-            } else {
-                header.classList.remove('bg-dark-surface/95', 'backdrop-blur', 'shadow-lg', 'py-3');
-                header.classList.add('py-6');
-            }
 
             // Scroll Progress
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scroll-progress').style.width = scrolled + "%";
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('scroll-progress').style.width = scrolled + "%";
 
-            // CTA Banner
-            const cta = document.getElementById('cta-banner');
-            if (window.scrollY > 400) {
-                cta.classList.remove('translate-y-full');
-            } else {
-                cta.classList.add('translate-y-full');
-            }
-        });
+                // Header BG
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-dark-surface/95', 'backdrop-blur-md', 'shadow-lg');
+                } else {
+                    header.classList.remove('bg-dark-surface/95', 'backdrop-blur-md', 'shadow-lg');
+                }
 
-        // Mobile Menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+                // Scroll Reveal
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 50) {
+                        el.classList.add('visible');
+                    }
+                });
+            });
 
-        // Project Logic
-        function renderProjects(filter) {
-            const grid = document.getElementById('projects-grid');
-            grid.innerHTML = '';
-            const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+            // Animated Counters
+            const counters = document.querySelectorAll('.counter');
+            let started = false;
+            const startCounters = () => {
+                if(started) return;
+                const section = document.querySelector('.counter').closest('section');
+                if(section.getBoundingClientRect().top < window.innerHeight) {
+                    started = true;
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const inc = target / 100;
+                        const updateCount = () => {
+                            const c = +counter.innerText;
+                            if (c < target) {
+                                counter.innerText = Math.ceil(c + inc);
+                                setTimeout(updateCount, 20);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                    });
+                }
+            };
+            window.addEventListener('scroll', startCounters);
+
+            // Projects Rendering & Filtering
+            const projectsGrid = document.getElementById('projects-grid');
+            const renderProjects = (filter) => {
+                projectsGrid.innerHTML = '';
+                const filtered = filter === 'Todos' ? projects : projects.filter(p => p.category === filter);
+                
+                filtered.forEach(p => {
+                    const el = document.createElement('div');
+                    el.className = 'group relative bg-dark-card border border-white/10 rounded-xl h-[320px] overflow-hidden cursor-pointer hover:border-gold/50 transition-all p-8 flex flex-col justify-between';
+                    el.onclick = () => openModal(p);
+                    el.innerHTML = `
+                        <div class="absolute inset-0 bg-blueprint opacity-10 pointer-events-none"></div>
+                        <div class="absolute -right-10 -bottom-10 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110">
+                            <i data-lucide="${p.icon}" width="200" height="200" class="text-white"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-dark-surface border border-gold/30 rounded-lg flex items-center justify-center text-gold mb-6 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all">
+                                <i data-lucide="${p.icon}" width="32" height="32"></i>
+                            </div>
+                            <span class="text-gold/80 text-[10px] font-bold uppercase tracking-[0.2em] border-l-2 border-gold pl-2 block mb-2">${p.category}</span>
+                            <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors font-display">${p.title}</h3>
+                        </div>
+                        <div class="relative z-10 pt-4 border-t border-white/10 border-dashed">
+                             <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500 font-mono">ID: ${p.year}-${p.id}</span>
+                                <span class="text-gold text-xs font-bold uppercase flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">Ver Plano <i data-lucide="arrow-right" width="12"></i></span>
+                             </div>
+                        </div>
+                    `;
+                    projectsGrid.appendChild(el);
+                });
+                lucide.createIcons();
+            };
+
+            renderProjects('Todos');
+
+            // Filter Buttons Logic
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('bg-gold', 'border-gold', 'text-black');
+                        b.classList.add('bg-transparent', 'border-white/20', 'text-gray-400');
+                    });
+                    e.target.classList.remove('bg-transparent', 'border-white/20', 'text-gray-400');
+                    e.target.classList.add('bg-gold', 'border-gold', 'text-black');
+                    renderProjects(e.target.dataset.filter);
+                });
+            });
+
+            // Modal Logic
+            const modal = document.getElementById('project-modal');
+            const modalContent = document.getElementById('modal-content');
             
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'group relative overflow-hidden rounded-xl bg-black border border-white/10 h-[350px] cursor-pointer';
-                card.onclick = () => openModal(p.id);
-                card.innerHTML = `
-                    <img src="${p.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-[2px]">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div class="w-14 h-14 rounded-full bg-gold/90 flex items-center justify-center"><i class="fas fa-plus text-black"></i></div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <span class="text-gold text-xs font-bold uppercase mb-1 block">${p.category}</span>
-                        <h3 class="text-xl font-bold text-white mb-2">${p.title}</h3>
+            function openModal(p) {
+                document.getElementById('modal-title').innerText = p.title;
+                document.getElementById('modal-desc').innerText = p.desc;
+                document.getElementById('modal-category').innerText = p.category;
+                document.getElementById('modal-client').innerText = p.client;
+                document.getElementById('modal-location').innerText = p.location;
+                document.getElementById('modal-year').innerText = p.year;
+                
+                const iconContainer = document.getElementById('modal-icon-container');
+                iconContainer.innerHTML = `<i data-lucide="${p.icon}" width="80" height="80" class="text-gold"></i>`;
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
+                }, 10);
+                lucide.createIcons();
+            }
+
+            function closeModal() {
+                modal.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+
+            document.getElementById('modal-close').onclick = closeModal;
+            document.getElementById('modal-backdrop').onclick = closeModal;
+
+            // Testimonials
+            let currentTestimonial = 0;
+            const testimonialContainer = document.getElementById('testimonial-container');
+            const renderTestimonial = () => {
+                const t = testimonials[currentTestimonial];
+                testimonialContainer.innerHTML = `
+                    <div class="fade-in-up visible transition-all duration-500">
+                         <p class="text-xl md:text-2xl text-white font-light italic mb-8">"${t.quote}"</p>
+                         <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-gold to-yellow-600 rounded-full flex items-center justify-center text-black font-bold text-2xl mb-4 shadow-lg">
+                                ${t.name.charAt(0)}
+                            </div>
+                            <h4 class="text-lg font-bold text-gold">${t.name}</h4>
+                            <p class="text-sm text-gray-400">${t.role}</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">${t.company}</p>
+                        </div>
                     </div>
                 `;
-                grid.appendChild(card);
+            };
+            renderTestimonial();
+            document.getElementById('next-testimonial').onclick = () => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                renderTestimonial();
+            };
+            document.getElementById('prev-testimonial').onclick = () => {
+                currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+                renderTestimonial();
+            };
+
+            // FAQ
+            const faqContainer = document.getElementById('faq-container');
+            faqs.forEach((faq, index) => {
+                const el = document.createElement('div');
+                el.innerHTML = `
+                    <button class="w-full flex items-center justify-between p-6 bg-dark-surface border border-white/10 rounded-lg hover:border-gold/50 text-left transition-colors" onclick="toggleFAQ(this)">
+                        <span class="text-lg font-medium text-white">${faq.q}</span>
+                        <i data-lucide="plus" class="text-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden overflow-hidden transition-all duration-300">
+                        <div class="p-6 text-gray-400 border-l-2 border-gold/30 ml-4 mt-2">${faq.a}</div>
+                    </div>
+                `;
+                faqContainer.appendChild(el);
             });
-        }
-
-        // Filter Buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-gold', 'border-gold', 'text-black');
-                    b.classList.add('bg-transparent', 'text-gray-400');
-                });
-                btn.classList.remove('bg-transparent', 'text-gray-400');
-                btn.classList.add('bg-gold', 'border-gold', 'text-black');
-                renderProjects(btn.getAttribute('data-filter'));
-            });
+            window.toggleFAQ = (btn) => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    icon.style.transform = 'rotate(45deg)';
+                } else {
+                    content.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            };
+            lucide.createIcons();
         });
-
-        // Modal Logic
-        function openModal(id) {
-            const p = projects.find(x => x.id === id);
-            document.getElementById('modal-img').src = p.image;
-            document.getElementById('modal-cat').innerText = p.category;
-            document.getElementById('modal-title').innerText = p.title;
-            document.getElementById('modal-desc').innerText = p.details;
-            document.getElementById('modal-client').innerText = p.client;
-            document.getElementById('modal-location').innerText = p.location;
-            document.getElementById('modal-year').innerText = p.year;
-            document.getElementById('project-modal').classList.remove('hidden');
-            document.body.classList.add('modal-open');
-        }
-
-        function closeModal() {
-            document.getElementById('project-modal').classList.add('hidden');
-            document.body.classList.remove('modal-open');
-        }
-
-        // Testimonial Logic
-        let curTestimonial = 0;
-        function renderTestimonial(idx) {
-            const container = document.getElementById('testimonial-container');
-            const t = testimonials[idx];
-            container.innerHTML = `
-                <p class="text-xl md:text-2xl text-white font-light italic mb-8 leading-relaxed">"${t.quote}"</p>
-                <div>
-                    <h4 class="text-lg font-bold text-gold">${t.name}</h4>
-                    <p class="text-sm text-gray-400">${t.role}</p>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">${t.company}</p>
-                </div>
-            `;
-        }
-        document.getElementById('prev-testi').addEventListener('click', () => {
-            curTestimonial = (curTestimonial - 1 + testimonials.length) % testimonials.length;
-            renderTestimonial(curTestimonial);
-        });
-        document.getElementById('next-testi').addEventListener('click', () => {
-            curTestimonial = (curTestimonial + 1) % testimonials.length;
-            renderTestimonial(curTestimonial);
-        });
-
-        // FAQ Logic
-        function toggleFaq(idx) {
-            const ans = document.getElementById(`faq-ans-${idx}`);
-            const icon = document.getElementById(`faq-icon-${idx}`);
-            ans.classList.toggle('hidden');
-            icon.classList.toggle('rotate-45');
-        }
     </script>
 </body>
 </html>
